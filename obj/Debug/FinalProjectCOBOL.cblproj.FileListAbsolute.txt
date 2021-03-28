@@ -1,0 +1,10 @@
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\bin\Debug\FinalProjectCOBOL.exe
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\bin\Debug\FinalProjectCOBOL.pdb
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\bin\Debug\FinalProjectCOBOL.A6-DataValidation.idy
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\obj\Debug\FinalProjectCOBOL.cblprojAssemblyReference.cache
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\obj\Debug\FinalProjectCOBOL.cblproj.CoreCompileInputs.cache
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\obj\Debug\FinalProjectCOBOL.exe
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\obj\Debug\FinalProjectCOBOL.pdb
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\obj\Debug\FinalProjectCOBOL.A6-DataValidation.idy
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\bin\Debug\FinalProjectCOBOL.FinalProject-DataSplitAndCount.idy
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\obj\Debug\FinalProjectCOBOL.FinalProject-DataSplitAndCount.idy
