@@ -19,20 +19,20 @@
 	   file-control.
       * Input file declaration
            select valid-data-file
-	           assign to "../../data/VALID-DATA-1-Edit.out"
+	           assign to "../../../data/VALID-DATA-1-Edit.out"
 			   organization is line sequential.
 
       * Output file declaration
            select sl-data-file
-               assign to "../../data/S&LDataFile.out"
+               assign to "../../../data/S&LDataFile.out"
                organization is line sequential.
 
 		   select r-data-file
-			   assign to "../../data/ReturnsDataFile.out"
+			   assign to "../../../data/ReturnsDataFile.out"
 			   organization is line sequential.
 
 		   select counts-and-controls-file
-	   		   assign to "../../data/ReturnsDataFile.out"
+	   		   assign to "../../../data/CountsAndControlsReportFile.out"
 	   		   organization is line sequential.
 	  ******************************************************************
 	   data division.
@@ -236,7 +236,7 @@
 	   	   perform 200-initial-read.
 	   	   perform 300-process-pages
 	   		   until ws-eof-flag equals ws-file-empty.
-	       perform 600-print-totals.
+      *    perform 600-print-totals.
 		   perform 700-close-files.
 
       * Inform user of program status and exit process
@@ -276,10 +276,10 @@
 		   if (ws-page-count > ws-one) then
 			   write report-line
 			       after advancing page
-			   perform 310-print-page-header
+      *        perform 310-print-page-header
 		   else
-			   write report-line
-			   perform 330-print-headings
+      *        write data-line
+      *        perform 330-print-headings
 		   end-if.
 		         
       * Process data on pages for entire input file
@@ -304,7 +304,7 @@
              after advancing ws-one line.
 
        320-print-report-header.
-		   write report-line from ws-heading1-name-line.
+      *    write report-line from ws-heading1-name-line.
 
 	   330-print-headings.
       * Print both overall report and column headings
@@ -325,18 +325,7 @@
 		   
 
 	  * Declare record's valid status if no errors arise
-		   if (ws-error-message = ws-blank) then
-	  *		   write to data file here
-			   write r-line from ws-raw-data
-			   add ws-one to ws-valid-count
-			   subtract ws-one from ws-line-count
-		   else
-	  *			Writing report line
-			   write sl-line from ws-raw-data
-			   add ws-one to ws-error-count
-		   end-if.
-
-
+		  
 		   move spaces to ws-error-message.
 
 

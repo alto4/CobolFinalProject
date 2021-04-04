@@ -1,0 +1,8 @@
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\Program2DataSplitAndCount\bin\Debug\Program2DataSplitAndCount.exe
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\Program2DataSplitAndCount\bin\Debug\Program2DataSplitAndCount.pdb
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\Program2DataSplitAndCount\bin\Debug\Program2DataSplitAndCount.FinalProject-DataSplitAndCount.idy
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\Program2DataSplitAndCount\obj\Debug\Program2DataSplitAndCount.cblproj.CoreCompileInputs.cache
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\Program2DataSplitAndCount\obj\Debug\Program2DataSplitAndCount.exe
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\Program2DataSplitAndCount\obj\Debug\Program2DataSplitAndCount.pdb
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\Program2DataSplitAndCount\obj\Debug\Program2DataSplitAndCount.FinalProject-DataSplitAndCount.idy
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\Program2DataSplitAndCount\obj\Debug\Program2DataSplitAndCount.cblprojAssemblyReference.cache
