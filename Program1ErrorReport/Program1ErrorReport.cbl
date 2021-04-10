@@ -19,20 +19,20 @@
 	   file-control.
       * Input file declaration
            select transaction-file
-	           assign to "../../data/project6.dat"
+	           assign to "../../../data/project6.dat"
 			   organization is line sequential.
 
       * Output file declaration
 		   select error-file
-		       assign to "../../data/ERROR-1-Edit.out"
+		       assign to "../../../data/ERROR-1-Edit.out"
 			   organization is line sequential.
 		   
            select valid-data-file
-                   assign to "../../data/VALID-DATA-1-Edit.out"
+                   assign to "../../../data/VALID-DATA-1-Edit.out"
                    organization is line sequential.
 
 		   select invalid-data-file
-				   assign to "../../data/INVALID-DATA-1-Edit.out"
+				   assign to "../../../data/INVALID-DATA-1-Edit.out"
 				   organization is line sequential.
 	  ******************************************************************
 	   data division.

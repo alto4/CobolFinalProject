@@ -142,45 +142,76 @@
        01 ws-summary.
 		   05 ws-summary-hor-rule-line   pic x(34)
                              value "----------------------------------".
-		   05 ws-summary-heading		 pic x(19)
-							 value " VALIDATION SUMMARY".
-           05 ws-input-count-line.
-			   10 filler                 pic x
-                             value space.
-		       10 filler                 pic x(19)
-                             value "RECORDS READ COUNT:".
-			   10 filler                 pic x(3)
-                             value spaces.
-               10 ws-input-count         pic 99(3)
-                             value 0.
-			   10 filler                 pic x(8)
-                             value spaces.
-		   05 ws-good-count-line.
-			   10 filler                 pic x
-                             value space.
-		       10 filler                 pic x(14)
-                             value "VALID RECORDS:".
-			   10 filler                 pic x(2)
-                             value spaces.
-               10 ws-valid-count          pic 9(3)
-                             value 0.
-			   10 filler                 pic x(15)
-                             value spaces.
-		   05 ws-error-count-line.
-			   10 filler                 pic x
-                             value space.
-		       10 filler                 pic x(14)
-                             value "INVALID COUNT:".
-			   10 filler                 pic x
-                             value spaces.
-               10 ws-error-count         pic 9(3)
-                             value 0.
-			   10 filler                 pic x(15)
-                             value spaces.
+		   05 ws-summary-heading		 pic x(20)
+							 value " TRANSACTION SUMMARY".
+      
 
+	   01 ws-transaction-code-counts.
+		   05 ws-s-count-line.
+		       10 filler				 pic x(25)
+	   							   value "Number of S Transactions:".
+		       10 filler				 pic x(12)
+	   							   value spaces.
+		       10 ws-code-s-count	     pic zz9
+                                   value 0.
+		    05 ws-l-count-line.
+		       10 filler				 pic x(25)
+	   							   value "Number of L Transactions:".
+		       10 filler				 pic x(12)
+	   							   value spaces.
+		       10 ws-code-l-count	     pic zz9
+                                   value 0.
+		    05 ws-sl-count-line.
+		       10 filler				 pic x(27)
+	   							   value "Number of S&L Transactions:".
+		       10 filler				 pic x(10)
+	   							   value spaces.
+		       10 ws-code-sl-count	     pic zz9
+                                   value 0.
+		    05 ws-r-count-line.
+		       10 filler				 pic x(25)
+	   							   value "Number of R Transactions:".
+		       10 filler				 pic x(12)
+	   							   value spaces.
+		       10 ws-code-r-count	     pic zz9
+                                   value 0.
+		   
+       01 ws-total-code-amounts.
+		   05 ws-s-total-amount-line.
+			   10 filler                 pic x(22)
+							   value "S Record Total Amount:".
+			   10 filler                 pic x(8)
+		                       value spaces.
+               10 ws-s-total-amount	     pic $zzz,zz9.99.
+		   05 ws-l-total-amount-line.
+			   10 filler                 pic x(22)
+							   value "L Record Total Amount:".
+			   10 filler                 pic x(8)
+		                       value spaces.
+               10 ws-l-total-amount	     pic $zzz,zz9.99.
+		   05 ws-sl-total-amount-line.
+			   10 filler                 pic x(23)
+							   value "SL Record Total Amount:".
+			   10 filler                 pic x(7)
+		                       value spaces.
+               10 ws-sl-total-amount	 pic $zzz,zz9.99.
+
+		   05 ws-r-total-amount-line.
+			   10 filler                 pic x(22)
+							   value "R Record Total Amount:".
+			   10 filler                 pic x(8)
+		                       value spaces.
+               10 ws-r-total-amount	     pic $zzz,zz9.99.
+
+	   01 ws-grand-total-line.
+		   05 filler                     pic x(22)
+							   value "S Record Total Amount:".
+		   05 filler                     pic x(8)
+		                       value spaces.
+           05 ws-grand-total-amount      pic $zzz,zz9.99 value 0.
 	  * Execution display variables
 	   01 ws-execution-messages.
-		   05 ws-status-message          pic x(31)
+		   05 ws-status-message          pic x(34)
                            value "Sorting valid transaction records.".
 	       05 ws-output-dest-message     pic x(36)
                            value "Please proceed to the 'data' folder.".
@@ -193,36 +224,23 @@
 	       05 ws-line-count              pic 99    value 0.
 	       05 ws-record-count            pic 9(3)  value 0.
 	  * Transaction code counters
-		   05 ws-code-s-count			 pic 9(3)  value 0.
-		   05 ws-code-r-count			 pic 9(3)  value 0.
-           05 ws-code-l-count			 pic 9(3)  value 0.
-       
+		   05 ws-input-count             pic 9(3)  value 0.
+		   05 ws-calc-code-s-count	     pic 9(3)  value 0.
+		   05 ws-calc-code-l-count	     pic 9(3)  value 0.
+		   05 ws-calc-code-r-count	     pic 9(3)  value 0.
+		   05 ws-calc-code-sl-count	     pic 9(3)  value 0.
+	   01 ws-calcs.
+		   05 ws-calc-s-total-amount     pic 9(6)  value 0.
+		   05 ws-calc-r-total-amount     pic 9(6)  value 0.
+		   05 ws-calc-l-total-amount     pic 9(6)  value 0.
+		   05 ws-calc-sl-total-amount    pic 9(6)  value 0.
+		   05 ws-calc-grand-total        pic 9(6)v99
+                                                   value 0.
+
+
 	  * Pagination constants
        77 ws-lines-per-page              pic 9(3)  value 10.
-
-      * Error message content constants
-	   77 ws-code-err-msg                pic x(22)
-								   value "WRONG TRANSACTION CODE".
-	   77 ws-type-error-msg              pic x(18)
-	                               value "WRONG PAYMENT TYPE".
-	   77 ws-store-num-err-msg           pic x(20)
-								   value "INVALID STORE NUMBER".
-	   77 ws-inv-num-left-err-msg        pic x(22)
-	                               value "INVOICE LEFT INVALID".
-	   77 ws-inv-num-left-same-msg       pic x(22)
-	   	   						   value "INVOICE LEFT SAME".
-	   77 ws-inv-num-right-err-msg       pic x(22)
-	   							   value "INVOICE RIGHT INVALID".
-	   77 ws-inv-num-no-dash-err-msg     pic x(18)
-	   	   						   value "INVOICE NEEDS DASH".
-	   77 ws-sku-invalid-err-msg         pic x(11)
-	   	   	   					   value "INVALID SKU".
-	   77 ws-trans-amount-err-msg        pic x(26)
-							       value "INVALID TRANSACTION AMOUNT".
-	   77 ws-sku-blank-err-msg           pic x(19)
-	   	   	   						   value "SKU CANNOT BE BLANK".
-	   77 ws-valid-record-msg            pic x(13)
-								   value "*VALID RECORD".
+	         
       * Utility constants
        77 ws-one                         pic 9        value 1.
 	   77 ws-file-empty                  pic x        value "y".
@@ -236,7 +254,7 @@
 	   	   perform 200-initial-read.
 	   	   perform 300-process-pages
 	   		   until ws-eof-flag equals ws-file-empty.
-      *    perform 600-print-totals.
+           perform 600-print-totals.
 		   perform 700-close-files.
 
       * Inform user of program status and exit process
@@ -318,16 +336,13 @@
 		   add ws-one                 to ws-record-count.
 
 		   move transaction-record    to ws-raw-data.
-
-		   
+		   		   
       *  Validate all record details according to business rules
 		   perform 410-check-trans-code.
 		   
-
 	  * Declare record's valid status if no errors arise
 		  
 		   move spaces to ws-error-message.
-
 
 		   read valid-data-file
 		       at end move ws-file-empty
@@ -336,19 +351,45 @@
 	   410-check-trans-code. 
       * Increment valid item code counters, or produce code error
 		   if (tr-code-s) then
-			   add ws-one             to ws-code-s-count
+			   add ws-one             to ws-calc-code-s-count
+			   add tr-amount          to ws-calc-s-total-amount
 			   write sl-line from ws-raw-data
 		   else if (tr-code-r) then
-			   add ws-one             to ws-code-r-count
+			   add ws-one             to ws-calc-code-r-count
+			   add tr-amount          to ws-calc-r-total-amount
 			   write r-line from ws-raw-data
 		   else if (tr-code-l) then
-			   add ws-one             to ws-code-l-count
+			   add ws-one             to ws-calc-code-l-count
+			   add tr-amount          to ws-calc-l-total-amount
 			   write sl-line from ws-raw-data
            end-if.
 
+		   add ws-calc-code-l-count   to ws-calc-code-s-count
+			 giving ws-code-sl-count.
+
+		   add ws-calc-l-total-amount to ws-calc-s-total-amount
+			 giving ws-calc-sl-total-amount.
+
 	   600-print-totals.
-	  * Print total values
+	  * Print total number of transactions by type
+		   move ws-calc-code-s-count  to ws-code-s-count.
+		   move ws-calc-code-l-count  to ws-code-l-count.
+		   move ws-calc-code-sl-count to ws-code-sl-count.
+		   move ws-calc-code-r-count  to ws-code-r-count.
+
+	  * Print total amounts values by transaction type
 		   move ws-record-count       to ws-input-count.
+
+		   move ws-calc-s-total-amount 
+			                          to ws-s-total-amount.
+           move ws-calc-l-total-amount
+			                          to ws-l-total-amount.
+		   move ws-calc-r-total-amount 
+			                          to ws-r-total-amount.
+		   move ws-calc-sl-total-amount 
+			                          to ws-sl-total-amount.
+
+		   perform 610-get-grand-total-amount.
 
       * Format summary section of report
 		   write report-line from ws-summary-hor-rule-line
@@ -358,14 +399,41 @@
 		   write report-line from ws-blank
 			 after advancing ws-one lines.
 
-      * Display required totals in summary
-		   write report-line from ws-input-count-line
-	   		 after advancing ws-one lines.
-		   write report-line from ws-good-count-line
+      * 
+	   write report-line from ws-s-count-line
 			 after advancing ws-one lines.
-		   write report-line from ws-error-count-line
+		   write report-line from ws-r-count-line
+			 after advancing ws-one lines.
+		   write report-line from ws-l-count-line
+			 after advancing ws-one lines.
+		   write report-line from ws-sl-count-line
+			 after advancing ws-one lines.
+
+		   write report-line from ws-summary-hor-rule-line
+			 after advancing ws-one lines.
+      * Display required totals in summary
+		   write report-line from ws-s-total-amount-line
+	   		 after advancing ws-one lines.
+		   write report-line from ws-r-total-amount-line
+			 after advancing ws-one lines.
+		   write report-line from ws-l-total-amount-line
+			 after advancing ws-one lines.
+		   write report-line from ws-sl-total-amount-line
 			 after advancing ws-one lines.
 	
+      * Write grand total line
+		   write report-line from ws-summary-hor-rule-line
+			 after advancing ws-one lines.
+		   write report-line from ws-grand-total-line
+			 after advancing ws-one lines.
+	   610-get-grand-total-amount.
+
+		   subtract ws-calc-r-total-amount
+             from  ws-calc-sl-total-amount
+		       giving ws-calc-grand-total.
+
+		   move ws-calc-grand-total to ws-grand-total-amount. 
+
 	   700-close-files.
 		   close valid-data-file, sl-data-file, r-data-file,
              counts-and-controls-file.

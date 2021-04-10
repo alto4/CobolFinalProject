@@ -2,10 +2,10 @@
   <PropertyGroup>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <ProjectGuid>{E8976C1E-630F-4046-8EBB-8DDCDDB10E9A}</ProjectGuid>
-    <OutputName>FinalProjectCOBOL</OutputName>
+    <ProjectGuid>{8350E008-E8B2-4182-B86E-1B1A2DFD229F}</ProjectGuid>
+    <OutputName>Program1ErrorReport</OutputName>
     <OutputType>Exe</OutputType>
-    <RootNamespace>FinalProjectCOBOL</RootNamespace>
+    <RootNamespace>Program1ErrorReport</RootNamespace>
     <PreserveCase>True</PreserveCase>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
   </PropertyGroup>
@@ -42,7 +42,7 @@
     <Import Include="System.Text" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="data\" />
+    <Compile Include="Program1ErrorReport.cbl" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Micro Focus\Visual COBOL\v1.0\MicroFocus.COBOL.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
