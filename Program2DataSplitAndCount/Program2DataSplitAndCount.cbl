@@ -288,6 +288,12 @@
 		   05 ws-calc-code-l-count	     pic 9(3)  value 0.
 		   05 ws-calc-code-r-count	     pic 9(3)  value 0.
 		   05 ws-calc-code-sl-count	     pic 9(3)  value 0.
+		   05 ws-calc-s-count			 pic 9(3)    occurs 6 times.
+		   05 ws-calc-r-count			 pic 9(3)    occurs 6 times.
+		   05 ws-calc-l-count			 pic 9(3)    occurs 6 times.
+		   05 ws-ca-count				 pic 9(3)    occurs 6 times.
+		   05 ws-cr-count				 pic 9(3)    occurs 6 times.
+		   05 ws-db-count				 pic 9(3)    occurs 6 times.
 	   01 ws-calcs.
 		   05 ws-calc-s-total-amount     pic 9(6)  value 0.
 		   05 ws-calc-r-total-amount     pic 9(6)  value 0.
