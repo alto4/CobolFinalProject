@@ -88,66 +88,107 @@
 	   fd counts-and-controls-file
 		   data record is report-line
 		   record contains 100 characters.
-       01 report-line     		pic x(50).
+       01 report-line     		         pic x(94).
 	  ******************************************************************
 	   working-storage section.
 	   	  
       * Headings 
       * Assignment title heading
-       01 ws-heading1-name-line.
-		   05 ws-name			         pic x(11) value "Scott Alton".
-		   05 filler                     pic x(10) value spaces.
-           05 ws-assignment-title	     pic x(13) value "Final Project".
-		  
       * Page title heading
-	   01 ws-heading2-title.
-		   05 filler			         pic x(12) value spaces. 
-		   05 ws-title			         pic x(12) value "ERROR REPORT".
-		   05 filler                     pic x(10) value spaces.
-		   05 ws-page-num                pic 99     value 1.
+	   01 ws-heading1-title.
+		   05 filler			         pic x(35) value spaces. 
+		   05 ws-title			         pic x(25)
+                                    value "COUNTS AND CONTROL TOTALS".
+		   05 filler                     pic x(35) value spaces.
 
+      * Cash       Credit   
       * Column headings
 	   01 ws-col-headings-1.
-		   05 filler                     pic x(1)  value spaces.
-		   05 filler                     pic x(6)  value "Record".
+		   05 filler                     pic x(3)  value spaces.
+		   05 filler                     pic x(5)  value "Store".
 		   05 filler                     pic x(2)  value spaces.
-           05 filler                     pic x(8)  value "--------".
-		   05 filler                     pic x(8)  value "Raw Data".
-		   05 filler                     pic x(8)  value "--------".
-	  
+           05 filler                     pic x(13) value "Sales/Layaway".
+		   05 filler					 pic x(5)  value spaces.
+		   05 filler                     pic x(7)  value "Returns".
+		   05 filler                     pic x(3)  value spaces.
+		   05 filler                     pic x(7)  value "Returns".
+		   05 filler					 pic x(2)  value spaces.
+		   05 filler					 pic x(5)  value "Sales".
+		   05 filler					 pic x(2)  value spaces.
+		   05 filler					 pic x(7)  value "Layaway".
+		   05 filler					 pic x(3)  value spaces.
+		   05 filler					 pic x(5)  value "Debit".
+		   05 filler					 pic x(6)  value spaces.
+		   05 filler					 pic x(4)  value "Cash".
+		   05 filler					 pic x(7)  value spaces.
+		   05 filler					 pic x(6)  value "Credit".
+		   05 filler					 pic x(7)  value spaces.
+
 	   01 ws-col-headings-2.
-		   05 filler                     pic x(1)
-                                             value spaces.
-		   05 filler                     pic x(6)
-                                             value "Number".
-		   05 filler                     pic x(6)
-                                             value spaces.
-           05 filler                     pic x(18)
-                                             value "and Error Messages".
-		   05 filler					 pic x(2)
-                                             value spaces.
+		   05 filler                     pic x(5)  value spaces.
+		   05 filler					 pic x(1)  value "#".
+		   05 filler					 pic x(8)  value spaces.
+		   05 filler					 pic x(6)  value "Amount".
+		   05 filler					 pic x(9)  value spaces.
+		   05 filler					 pic x(6)  value "Amount".
+		   05 filler					 pic x(4)  value spaces.
+		   05 filler					 pic x(5)  value "Count".
+		   05 filler					 pic x(3)  value spaces.
+		   05 filler					 pic x(5)  value "Count".
+		   05 filler					 pic x(3)  value spaces.
+		   05 filler					 pic x(5)  value "Count".
+		   05 filler					 pic x(3)  value spaces.
+		   05 filler					 pic x(9)  value "Payment %".
+		   05 filler					 pic x(2)  value spaces.
+		   05 filler					 pic x(9)  value "Payment %".
+		   05 filler					 pic x(2)  value spaces.
+		   05 filler					 pic x(9)  value "Payment %".
+		   05 filler					 pic x(7)  value spaces.
+
 
       * Individual formatted record line
-	   01 ws-detail-line. 
-           05 filler                     pic x(2)  value spaces.
-           05 ws-record-num              pic zz9.
+	   01 ws-store-line. 
+           05 ws-store-detail-line             occurs 6 times.
+			   10 filler                 pic x(4)  value spaces.
+               10 ws-store-num           pic 9(3).
+			   10 filler                 pic x(5)  value spaces.
+			   10 ws-sl-amount           pic $$$,$$9.99
+											       value 0.
+			   10 filler                 pic x(3)  value spaces.
+			   10 ws-r-amount            pic $$,$$9.99
+                                                   value 0.
+			   10 filler                 pic x(6)  value spaces. 
+			   10 ws-r-count             pic 9(3)  value 0.
+			   10 filler                 pic x(5)  value spaces.
+			   10 ws-s-count             pic 9(3)  value 0.
+			   10 filler                 pic x(5)  value spaces.
+			   10 ws-l-count             pic 9(3)  value 0.
+			   10 filler                 pic x(5)  value spaces.
+		       10 ws-debit-per		     pic 99.9  value 0.
+			   10 filler                 pic x(7)  value spaces.
+			   10 ws-cash-per		     pic 99.9  value 0.
+			   10 filler                 pic x(8)  value spaces.
+			   10 ws-cash-per		     pic 99.9  value 0.
+           
+               
            05 filler                     pic x(4)  value spaces.
 		   05 ws-raw-data                pic x(36).
-      * Formatted error line
-	   01 ws-error-line.
-		   05 filler					 pic x(9)  value spaces.
-		   05 ws-error-message       	 pic x(25) value spaces.
-		   		   	
+
+ 
       * Summary lines
-       01 ws-summary.
-		   05 ws-summary-hor-rule-line   pic x(34)
-                             value "----------------------------------".
-		   05 ws-summary-heading		 pic x(20)
-							 value " TRANSACTION SUMMARY".
-      
+       01 ws-horizontal-rule.
+		   05 ws-summary-hor-rule-line-1 pic x(46)
+				 value "----------------------------------------------".
+		   05 ws-summary-hor-rule-line-2 pic x(46)
+	   		     value "----------------------------------------------".
+		   01 ws-summary-line.
+	       05 ws-summary-heading		 pic x(29)
+		         value "         TRANSACTION SUMMARY".
 
 	   01 ws-transaction-code-counts.
 		   05 ws-s-count-line.
+			   10 filler                 pic x(3) 
+		                           value spaces.
 		       10 filler				 pic x(25)
 	   							   value "Number of S Transactions:".
 		       10 filler				 pic x(12)
@@ -155,6 +196,8 @@
 		       10 ws-code-s-count	     pic zz9
                                    value 0.
 		    05 ws-l-count-line.
+			   10 filler                 pic x(3) 
+		                           value spaces.
 		       10 filler				 pic x(25)
 	   							   value "Number of L Transactions:".
 		       10 filler				 pic x(12)
@@ -162,13 +205,17 @@
 		       10 ws-code-l-count	     pic zz9
                                    value 0.
 		    05 ws-sl-count-line.
-		       10 filler				 pic x(27)
+			   10 filler                 pic x(3) 
+		                           value spaces.
+               10 filler				 pic x(27)
 	   							   value "Number of S&L Transactions:".
 		       10 filler				 pic x(10)
 	   							   value spaces.
 		       10 ws-code-sl-count	     pic zz9
                                    value 0.
 		    05 ws-r-count-line.
+			   10 filler                 pic x(3) 
+		                           value spaces.
 		       10 filler				 pic x(25)
 	   							   value "Number of R Transactions:".
 		       10 filler				 pic x(12)
@@ -178,36 +225,46 @@
 		   
        01 ws-total-code-amounts.
 		   05 ws-s-total-amount-line.
+			   10 filler                 pic x(3) 
+		                           value spaces.
 			   10 filler                 pic x(22)
-							   value "S Record Total Amount:".
+							       value "S Record Total Amount:".
 			   10 filler                 pic x(8)
-		                       value spaces.
+		                           value spaces.
                10 ws-s-total-amount	     pic $zzz,zz9.99.
 		   05 ws-l-total-amount-line.
+			   10 filler                 pic x(3) 
+		                           value spaces.
 			   10 filler                 pic x(22)
-							   value "L Record Total Amount:".
+							       value "L Record Total Amount:".
 			   10 filler                 pic x(8)
-		                       value spaces.
+		                           value spaces.
                10 ws-l-total-amount	     pic $zzz,zz9.99.
 		   05 ws-sl-total-amount-line.
+			   10 filler                 pic x(3) 
+		                           value spaces.
 			   10 filler                 pic x(23)
-							   value "SL Record Total Amount:".
+							       value "SL Record Total Amount:".
 			   10 filler                 pic x(7)
-		                       value spaces.
+		                           value spaces.
                10 ws-sl-total-amount	 pic $zzz,zz9.99.
 
 		   05 ws-r-total-amount-line.
+			   10 filler                 pic x(3) 
+		                           value spaces.
 			   10 filler                 pic x(22)
-							   value "R Record Total Amount:".
+							       value "R Record Total Amount:".
 			   10 filler                 pic x(8)
-		                       value spaces.
+		                           value spaces.
                10 ws-r-total-amount	     pic $zzz,zz9.99.
 
 	   01 ws-grand-total-line.
+		   05 filler                     pic x(3) 
+		                           value spaces.
 		   05 filler                     pic x(22)
-							   value "S Record Total Amount:".
+							       value "Grand Total Amount:".
 		   05 filler                     pic x(8)
-		                       value spaces.
+		                           value spaces.
            05 ws-grand-total-amount      pic $zzz,zz9.99 value 0.
 	  * Execution display variables
 	   01 ws-execution-messages.
@@ -221,8 +278,10 @@
       * Counters
        01 ws-counters.
 		   05 ws-page-count              pic 99    value 1.
+		   05 ws-store-count			 pic 99	   value 6.
 	       05 ws-line-count              pic 99    value 0.
 	       05 ws-record-count            pic 9(3)  value 0.
+		   05 ws-store-counter			 pic 9(3)  value 1.
 	  * Transaction code counters
 		   05 ws-input-count             pic 9(3)  value 0.
 		   05 ws-calc-code-s-count	     pic 9(3)  value 0.
@@ -236,7 +295,9 @@
 		   05 ws-calc-sl-total-amount    pic 9(6)  value 0.
 		   05 ws-calc-grand-total        pic 9(6)v99
                                                    value 0.
-
+		   05 ws-calc-sl-amount			 pic 9(6)v99 occurs 12 times.
+		   05 ws-calc-r-amount           pic 9(6)v99 occurs 12 times.
+	   01 ws-store-index                 pic 9     value 0.
 
 	  * Pagination constants
        77 ws-lines-per-page              pic 9(3)  value 10.
@@ -252,7 +313,10 @@
        000-main.
            perform 100-open-files.
 	   	   perform 200-initial-read.
-	   	   perform 300-process-pages
+		   perform 305-populate-store-nums.
+		   perform 310-print-page-header.
+
+           perform 300-process-pages
 	   		   until ws-eof-flag equals ws-file-empty.
            perform 600-print-totals.
 		   perform 700-close-files.
@@ -283,34 +347,25 @@
                                       to ws-eof-flag.
 
        300-process-pages.
-	  * Increment the page count and clear output from output lines
-		   move ws-page-count         to ws-page-num.
-		   move spaces                to report-line.
-		   move spaces                to ws-detail-line.
-		   move spaces                to ws-error-line.
-
-
-      * Show report title only on first page, column headers on all
-		   if (ws-page-count > ws-one) then
-			   write report-line
-			       after advancing page
-      *        perform 310-print-page-header
-		   else
-      *        write data-line
-      *        perform 330-print-headings
-		   end-if.
-		         
+	   		        
       * Process data on pages for entire input file
-		   perform 400-process-lines
-			   varying ws-line-count from ws-one by ws-one
-			       until (ws-line-count > ws-lines-per-page
-			       or ws-eof-flag = ws-file-empty).
+		   perform 400-process-lines until
+			    ws-eof-flag = ws-file-empty.
+	   305-populate-store-nums.
+		   move 01 to ws-store-num(1).
+		   move 02 to ws-store-num(2).
+		   move 03 to ws-store-num(3).
+		   move 04 to ws-store-num(4).
+		   move 05 to ws-store-num(5).
+		   move 12 to ws-store-num(6).
 
-		   add ws-one                 to ws-page-count.
+		   perform 406-populate-table
+			 until ws-store-counter > ws-store-count.
 
+		   move ws-one to ws-store-counter.
 	   310-print-page-header.
 		   write report-line from ws-blank.
-		   write report-line from ws-heading2-title
+		   write report-line from ws-heading1-title
 
 		   write report-line from ws-col-headings-1
 			 after advancing ws-one line.
@@ -331,36 +386,78 @@
 
 	   400-process-lines.
 	  * Assign record number and increment counter
-		   add ws-one                 to ws-record-count
-             giving ws-record-num.
 		   add ws-one                 to ws-record-count.
 
 		   move transaction-record    to ws-raw-data.
-		   		   
-      *  Validate all record details according to business rules
-		   perform 410-check-trans-code.
-		   
-	  * Declare record's valid status if no errors arise
-		  
-		   move spaces to ws-error-message.
+
+	  * Populate table with store numbers
+
+		   perform 402-get-store-index.
+           perform 410-check-trans-code.
+           perform 420-output-store-details.
 
 		   read valid-data-file
 		       at end move ws-file-empty
                                       to ws-eof-flag.
-		   
+	   402-get-store-index.
+		   evaluate (tr-store-num)
+			   when 01
+				   move 1 to ws-store-index
+			   when 02
+				   move 2 to ws-store-index
+			   when 03
+				   move 3 to ws-store-index
+			   when 04
+				   move 4 to ws-store-index
+			   when 05
+				   move 5 to ws-store-index
+			   when 12
+				   move 6 to ws-store-index
+			end-evaluate.
+	   
+	   406-populate-table.
+		   display "Store " ws-store-num(ws-store-counter).
+		   add ws-one to ws-store-counter.
+
+		  
 	   410-check-trans-code. 
       * Increment valid item code counters, or produce code error
 		   if (tr-code-s) then
 			   add ws-one             to ws-calc-code-s-count
+			   add ws-one             to ws-s-count(ws-store-index)
+
 			   add tr-amount          to ws-calc-s-total-amount
+
+      * DEBUG LINES
+			   display tr-amount " will be added here to Store with index " ws-store-index
+			   "Store with index " ws-store-index " has store number " ws-store-num(ws-store-index)
+
+			   add tr-amount          to ws-calc-sl-amount(ws-store-index)
+
+			   move ws-calc-sl-amount(ws-store-index)
+				                      to ws-sl-amount(ws-store-index)
+			   display "new total for store " ws-store-num(ws-store-index) " after purchase transaction. SL total amount now equals" ws-sl-amount(ws-store-index)
 			   write sl-line from ws-raw-data
 		   else if (tr-code-r) then
 			   add ws-one             to ws-calc-code-r-count
-			   add tr-amount          to ws-calc-r-total-amount
+			   add ws-one             to ws-r-count(ws-store-index)
+               add tr-amount          to ws-calc-r-total-amount
+
+			   add tr-amount          to ws-calc-r-amount(ws-store-index)
+
+			   move ws-calc-r-amount(ws-store-index)
+					                  to ws-r-amount(ws-store-index)
+	  		   display "new total for store " ws-store-num(ws-store-index) "  after return. R total amount now equals" ws-sl-amount(ws-store-index)
+
 			   write r-line from ws-raw-data
 		   else if (tr-code-l) then
 			   add ws-one             to ws-calc-code-l-count
+			   add ws-one             to ws-l-count(ws-store-index)
 			   add tr-amount          to ws-calc-l-total-amount
+			   add tr-amount          to ws-calc-sl-amount(ws-store-index)
+			   move ws-calc-sl-amount(ws-store-index)
+					                  to ws-sl-amount(ws-store-index)
+	  		   display "new total for store " ws-store-num(ws-store-index) "  after layaway transaction. SL total amount now equals" ws-sl-amount(ws-store-index)
 			   write sl-line from ws-raw-data
            end-if.
 
@@ -370,7 +467,18 @@
 		   add ws-calc-l-total-amount to ws-calc-s-total-amount
 			 giving ws-calc-sl-total-amount.
 
+	   420-output-store-details. 
+
+		  
+
 	   600-print-totals.
+		   write report-line from ws-store-detail-line(1).
+		   write report-line from ws-store-detail-line(2).
+		   write report-line from ws-store-detail-line(3).
+		   write report-line from ws-store-detail-line(4).
+		   write report-line from ws-store-detail-line(5).
+		   write report-line from ws-store-detail-line(6).
+
 	  * Print total number of transactions by type
 		   move ws-calc-code-s-count  to ws-code-s-count.
 		   move ws-calc-code-l-count  to ws-code-l-count.
@@ -391,11 +499,13 @@
 
 		   perform 610-get-grand-total-amount.
 
-      * Format summary section of report
-		   write report-line from ws-summary-hor-rule-line
+	  * Format summary section of report
+		   write report-line from ws-horizontal-rule
 			 after advancing ws-one lines.
 		   write report-line from ws-summary-heading
 		     after advancing ws-one lines.
+		   write report-line from ws-horizontal-rule
+			 after advancing ws-one lines.
 		   write report-line from ws-blank
 			 after advancing ws-one lines.
 
@@ -409,7 +519,7 @@
 		   write report-line from ws-sl-count-line
 			 after advancing ws-one lines.
 
-		   write report-line from ws-summary-hor-rule-line
+		   write report-line from ws-horizontal-rule
 			 after advancing ws-one lines.
       * Display required totals in summary
 		   write report-line from ws-s-total-amount-line
@@ -422,7 +532,7 @@
 			 after advancing ws-one lines.
 	
       * Write grand total line
-		   write report-line from ws-summary-hor-rule-line
+		   write report-line from ws-horizontal-rule
 			 after advancing ws-one lines.
 		   write report-line from ws-grand-total-line
 			 after advancing ws-one lines.

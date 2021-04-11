@@ -1,15 +1,27 @@
-
-----------------------------------
- TRANSACTION SUMMARY
 
-Number of S Transactions:             71
-Number of R Transactions:             15
-Number of L Transactions:             16
-Number of S&L Transactions:            0
-----------------------------------
-S Record Total Amount:        $ 19,720.00
-R Record Total Amount:        $    597.00
-L Record Total Amount:        $  3,205.00
-SL Record Total Amount:       $ 22,925.00
-----------------------------------
-S Record Total Amount:        $ 22,328.00
+                                   COUNTS AND CONTROL TOTALS
+
+   Store  Sales/Layaway     Returns   Returns  Sales  Layaway   Debit      Cash       Credit
+     #        Amount         Amount    Count   Count   Count   Payment %  Payment %  Payment %
+    001      $3,429.86     $169.96      004     017     004     00.0       00.0        00.0
+    002      $5,219.77     $224.96      005     025     005     00.0       00.0        00.0
+    003      $1,789.91       $0.00      000     010     002     00.0       00.0        00.0
+    004      $1,489.95     $109.99      002     005     002     00.0       00.0        00.0
+    005      $1,389.42      $24.99      001     009     001     00.0       00.0        00.0
+    012      $9,669.94      $79.97      003     005     002     00.0       00.0        00.0
+
+--------------------------------------------------------------------------------------------
+         TRANSACTION SUMMARY
+--------------------------------------------------------------------------------------------
+
+   Number of S Transactions:             71
+   Number of R Transactions:             15
+   Number of L Transactions:             16
+   Number of S&L Transactions:            0
+--------------------------------------------------------------------------------------------
+   S Record Total Amount:        $ 19,720.00
+   R Record Total Amount:        $    597.00
+   L Record Total Amount:        $  3,205.00
+   SL Record Total Amount:       $ 22,925.00
+--------------------------------------------------------------------------------------------
+   Grand Total Amount:           $ 22,328.00
