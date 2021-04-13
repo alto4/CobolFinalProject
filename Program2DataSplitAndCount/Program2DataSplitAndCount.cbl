@@ -288,28 +288,36 @@
 		   05 ws-calc-code-l-count	     pic 9(3)  value 0.
 		   05 ws-calc-code-r-count	     pic 9(3)  value 0.
 		   05 ws-calc-code-sl-count	     pic 9(3)  value 0.
-		   05 ws-calc-s-count			 pic 9(3)    occurs 6 times.
-		   05 ws-calc-r-count			 pic 9(3)    occurs 6 times.
-		   05 ws-calc-l-count			 pic 9(3)    occurs 6 times.
+      * Payment types
 		   05 ws-ca-count				 pic 9(3)    occurs 6 times.
 		   05 ws-cr-count				 pic 9(3)    occurs 6 times.
 		   05 ws-db-count				 pic 9(3)    occurs 6 times.
+		   05 ws-sales-trans-count   	 pic 9(3)	 occurs 6 times.
 	   01 ws-calcs.
-		   05 ws-calc-s-total-amount     pic 9(6)  value 0.
-		   05 ws-calc-r-total-amount     pic 9(6)  value 0.
-		   05 ws-calc-l-total-amount     pic 9(6)  value 0.
-		   05 ws-calc-sl-total-amount    pic 9(6)  value 0.
+		   05 ws-calc-s-total-amount     pic 9(6)v99
+                                                   value 0.
+		   05 ws-calc-r-total-amount     pic 9(6)v99
+                                                   value 0.
+		   05 ws-calc-l-total-amount     pic 9(6)v99
+                                                   value 0.
+		   05 ws-calc-sl-total-amount    pic 9(6)v99
+                                                   value 0.
 		   05 ws-calc-grand-total        pic 9(6)v99
                                                    value 0.
 		   05 ws-calc-sl-amount			 pic 9(6)v99 occurs 12 times.
 		   05 ws-calc-r-amount           pic 9(6)v99 occurs 12 times.
+		   05 ws-calc-per				 pic 99v99 value 0.
 	   01 ws-store-index                 pic 9     value 0.
-
-	  * Pagination constants
-       77 ws-lines-per-page              pic 9(3)  value 10.
-	         
+	       
       * Utility constants
        77 ws-one                         pic 9        value 1.
+	   77 ws-two                         pic 9        value 2.
+	   77 ws-three                       pic 9        value 3.
+       77 ws-four                        pic 9        value 4.
+	   77 ws-five                        pic 9        value 5.
+	   77 ws-six						 pic 9		  value 6.
+	   77 ws-twelve                      pic 99       value 12.
+	   77 ws-zero                        pic 9        value 0.
 	   77 ws-file-empty                  pic x        value "y".
 	   77 ws-eof-flag                    pic x(1)     value "n".
 	   77 ws-blank                       pic x        value space.
@@ -358,17 +366,17 @@
 		   perform 400-process-lines until
 			    ws-eof-flag = ws-file-empty.
 	   305-populate-store-nums.
-		   move 01 to ws-store-num(1).
-		   move 02 to ws-store-num(2).
-		   move 03 to ws-store-num(3).
-		   move 04 to ws-store-num(4).
-		   move 05 to ws-store-num(5).
-		   move 12 to ws-store-num(6).
+		   move ws-one                to ws-store-num(ws-one).
+		   move ws-two                to ws-store-num(ws-two).
+		   move ws-three              to ws-store-num(ws-three).
+		   move ws-four               to ws-store-num(ws-four).
+		   move ws-five               to ws-store-num(ws-five).
+		   move ws-twelve             to ws-store-num(ws-six).
 
 		   perform 406-populate-table
 			 until ws-store-counter > ws-store-count.
 
-		   move ws-one to ws-store-counter.
+		   move ws-one                to ws-store-counter.
 	   310-print-page-header.
 		   write report-line from ws-blank.
 		   write report-line from ws-heading1-title
@@ -400,30 +408,28 @@
 
 		   perform 402-get-store-index.
            perform 410-check-trans-code.
-           perform 420-output-store-details.
 
 		   read valid-data-file
 		       at end move ws-file-empty
                                       to ws-eof-flag.
 	   402-get-store-index.
 		   evaluate (tr-store-num)
-			   when 01
-				   move 1 to ws-store-index
-			   when 02
-				   move 2 to ws-store-index
-			   when 03
-				   move 3 to ws-store-index
-			   when 04
-				   move 4 to ws-store-index
-			   when 05
-				   move 5 to ws-store-index
-			   when 12
-				   move 6 to ws-store-index
+			   when ws-one
+				   move ws-one        to ws-store-index
+			   when ws-two
+				   move ws-two        to ws-store-index
+			   when ws-three
+				   move ws-three      to ws-store-index
+			   when ws-four
+				   move ws-four       to ws-store-index
+			   when ws-five
+				   move ws-five       to ws-store-index
+			   when ws-twelve
+				   move ws-six        to ws-store-index
 			end-evaluate.
 	   
 	   406-populate-table.
-		   display "Store " ws-store-num(ws-store-counter).
-		   add ws-one to ws-store-counter.
+		   add ws-one                 to ws-store-counter.
 
 		  
 	   410-check-trans-code. 
@@ -433,17 +439,14 @@
 			   add ws-one             to ws-s-count(ws-store-index)
 
 			   add tr-amount          to ws-calc-s-total-amount
-
-      * DEBUG LINES
-			   display tr-amount " will be added here to Store with index " ws-store-index
-			   "Store with index " ws-store-index " has store number " ws-store-num(ws-store-index)
-
+			        
 			   add tr-amount          to ws-calc-sl-amount(ws-store-index)
 
 			   move ws-calc-sl-amount(ws-store-index)
 				                      to ws-sl-amount(ws-store-index)
-			   display "new total for store " ws-store-num(ws-store-index) " after purchase transaction. SL total amount now equals" ws-sl-amount(ws-store-index)
+
 			   write sl-line from ws-raw-data
+			   perform 420-check-payment-type
 		   else if (tr-code-r) then
 			   add ws-one             to ws-calc-code-r-count
 			   add ws-one             to ws-r-count(ws-store-index)
@@ -453,7 +456,6 @@
 
 			   move ws-calc-r-amount(ws-store-index)
 					                  to ws-r-amount(ws-store-index)
-	  		   display "new total for store " ws-store-num(ws-store-index) "  after return. R total amount now equals" ws-sl-amount(ws-store-index)
 
 			   write r-line from ws-raw-data
 		   else if (tr-code-l) then
@@ -463,8 +465,9 @@
 			   add tr-amount          to ws-calc-sl-amount(ws-store-index)
 			   move ws-calc-sl-amount(ws-store-index)
 					                  to ws-sl-amount(ws-store-index)
-	  		   display "new total for store " ws-store-num(ws-store-index) "  after layaway transaction. SL total amount now equals" ws-sl-amount(ws-store-index)
 			   write sl-line from ws-raw-data
+
+               perform 420-check-payment-type
            end-if.
 
 		   add ws-calc-code-l-count   to ws-calc-code-s-count
@@ -473,11 +476,50 @@
 		   add ws-calc-l-total-amount to ws-calc-s-total-amount
 			 giving ws-calc-sl-total-amount.
 
-	   420-output-store-details. 
+		   
+	   420-check-payment-type. 
+		   display "PAYMENT TYPE " tr-payment-type " AT STORE " tr-store-num.
 
+		   if (tr-payment-type = "DB") then
+			   add ws-one to ws-db-count(ws-store-index)
+		   end-if.
+
+		   if (tr-payment-type = "CA") then
+			   add ws-one to ws-ca-count(ws-store-index)
+		   end-if.
+
+		   if (tr-payment-type = "CR") then
+			   add ws-one to ws-cr-count(ws-store-index)
+		   end-if.
+
+		   add ws-s-count(ws-store-index)  to ws-l-count(ws-store-index)
+		     giving ws-sales-trans-count(ws-store-index).
+
+
+		    display "divide ws-cr-count by ws-sales-trans-count(ws-store-index)".
+      *    display "divide " ws-cr-count(ws-store-index) " by " ws-sales-trans-count(ws-store-index).
+		   divide ws-cr-count(1) by ws-sales-trans-count(1)
+			 giving ws-calc-per.
+
+		   multiply ws-calc-per by 100 giving ws-calc-per.
+		   display "STORE 1 CR percent" ws-calc-per.
+
+      *    display "divide " ws--count(ws-store-index) " by " ws-sales-trans-count(ws-store-index).
+		   divide ws-db-count(1) by ws-sales-trans-count(1)
+			 giving ws-calc-per.
+
+		   display "percent of debit transactions" ws-calc-per.
+
+		   divide ws-ca-count(1) by ws-sales-trans-count(1)
+			 giving ws-calc-per.
+
+		   display "percent of cash transactions" ws-calc-per.
+		   
 		  
 
 	   600-print-totals.
+		  
+
 		   write report-line from ws-store-detail-line(1).
 		   write report-line from ws-store-detail-line(2).
 		   write report-line from ws-store-detail-line(3).
@@ -493,6 +535,10 @@
 
 	  * Print total amounts values by transaction type
 		   move ws-record-count       to ws-input-count.
+
+		   display "COUNT " ws-calc-code-s-count "+" ws-calc-code-l-count .
+		   add ws-calc-code-s-count   to ws-calc-code-l-count
+			 giving ws-code-sl-count.
 
 		   move ws-calc-s-total-amount 
 			                          to ws-s-total-amount.
@@ -514,6 +560,11 @@
 			 after advancing ws-one lines.
 		   write report-line from ws-blank
 			 after advancing ws-one lines.
+
+		   display ws-ca-count(1) "Cash payments".
+		   display ws-cr-count(1) "CREDIT PAYMENTS".
+		   display ws-db-count(1) "Debit payments".
+		  
 
       * 
 	   write report-line from ws-s-count-line
@@ -548,7 +599,7 @@
              from  ws-calc-sl-total-amount
 		       giving ws-calc-grand-total.
 
-		   move ws-calc-grand-total to ws-grand-total-amount. 
+		   move ws-calc-grand-total   to ws-grand-total-amount. 
 
 	   700-close-files.
 		   close valid-data-file, sl-data-file, r-data-file,

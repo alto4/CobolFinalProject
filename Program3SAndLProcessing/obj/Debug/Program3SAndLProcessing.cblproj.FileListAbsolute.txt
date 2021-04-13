@@ -1,0 +1,8 @@
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\Program3SAndLProcessing\bin\Debug\Program3SAndLProcessing.exe
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\Program3SAndLProcessing\bin\Debug\Program3SAndLProcessing.pdb
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\Program3SAndLProcessing\bin\Debug\Program3SAndLProcessing.Program3SAndLProcessing.idy
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\Program3SAndLProcessing\obj\Debug\Program3SAndLProcessing.cblprojAssemblyReference.cache
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\Program3SAndLProcessing\obj\Debug\Program3SAndLProcessing.cblproj.CoreCompileInputs.cache
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\Program3SAndLProcessing\obj\Debug\Program3SAndLProcessing.exe
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\Program3SAndLProcessing\obj\Debug\Program3SAndLProcessing.pdb
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\Program3SAndLProcessing\obj\Debug\Program3SAndLProcessing.Program3SAndLProcessing.idy

@@ -5,3 +5,4 @@ C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\Program1ErrorReport\obj\Debu
 C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\Program1ErrorReport\obj\Debug\Program1ErrorReport.exe
 C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\Program1ErrorReport\obj\Debug\Program1ErrorReport.pdb
 C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\Program1ErrorReport\obj\Debug\Program1ErrorReport.A6-DataValidation.idy
+C:\Users\Scott Alton\source\repos\FinalProjectCOBOL\Program1ErrorReport\obj\Debug\Program1ErrorReport.cblprojAssemblyReference.cache

@@ -9,6 +9,8 @@ Project("{535C04D7-A2A5-47C7-83E0-B340A995CD1F}") = "Program2DataSplitAndCount",
 EndProject
 Project("{535C04D7-A2A5-47C7-83E0-B340A995CD1F}") = "Program1ErrorReport", "Program1ErrorReport\Program1ErrorReport.cblproj", "{8350E008-E8B2-4182-B86E-1B1A2DFD229F}"
 EndProject
+Project("{535C04D7-A2A5-47C7-83E0-B340A995CD1F}") = "Program3SAndLProcessing", "Program3SAndLProcessing\Program3SAndLProcessing.cblproj", "{D6231159-CCD4-4C33-A45C-09951EEDFFF8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8350E008-E8B2-4182-B86E-1B1A2DFD229F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8350E008-E8B2-4182-B86E-1B1A2DFD229F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8350E008-E8B2-4182-B86E-1B1A2DFD229F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6231159-CCD4-4C33-A45C-09951EEDFFF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6231159-CCD4-4C33-A45C-09951EEDFFF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6231159-CCD4-4C33-A45C-09951EEDFFF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6231159-CCD4-4C33-A45C-09951EEDFFF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,197 @@
+
+Scott Alton          Final Project        ERROR REPORT                  Page: 1
+
+CODE         AMOUNT      TYPE  STORE NUM   INVOICE NUM     SKUCODE         TAX OWING
+
+
+
+S            0001000     C         0             A        SDFSKJ84MS09123   0000130
+
+S            0012999     D         0             B        247R20EHF02EF8E   0001689
+
+S            0008999     C         0             D        WI8HRW8H43FJSHF   0001169
+
+L            0004999     D         0             E        LFW8H88W84HFW4F   0000649
+
+S            0002999     D         0             C        WI8HRW8H43FJSHF   0000389
+
+S            0012999     D         0             B        247R20EHF02EF8E   0001689
+
+S            0008999     C         0             D        WI8HRW8H43FJSHF   0001169
+
+S            0001000     C         0             A        SDFSKJ84MS09123   0000130
+
+L            0112999     D         0             C        247R20EHF02EF8E   0014689
+
+L            0001000     C         0             C        SDFSKJ84MS09123   0000130
+
+S            0012999     D         0             A        247R20EHF02EF8E   0001689
+
+S            0008999     C         0             C        WI8HRW8H43FJSHF   0001169
+
+L            0004999     D         0             E        LFW8H88W84HFW4F   0000649
+
+S            0002000     C         0             D        SDFSKJ84MS09123   0000260
+
+S            0014999     C         0             A        247R20EHF02EF8E   0001949
+
+S            0012999     D         0             D        247R20EHF02EF8E   0001689
+
+S            0001000     C         0             B        SDFSKJ84MS09123   0000130
+
+S            0112999     D         0             D        247R20EHF02EF8E   0014689
+
+S            0000999     C         0             A        WI8HRW8H43FJSHF   0000129
+
+L            0004999     D         0             C        LFW8H88W84HFW4F   0000649        ERROR REPORT                  Page: 2
+CODE         AMOUNT      TYPE  STORE NUM   INVOICE NUM     SKUCODE         TAX OWING
+
+
+
+S            0014999     C         0             A        247R20EHF02EF8E   0001949
+
+S            0002999     D         0             A        WI8HRW8H43FJSHF   0000389
+
+S            0012999     D         0             C        247R20EHF02EF8E   0001689
+
+S            0008999     C         0             D        WI8HRW8H43FJSHF   0001169
+
+L            0004999     D         0             E        LFW8H88W84HFW4F   0000649
+
+S            0002000     C         0             A        SDFSKJ84MS09123   0000260
+
+S            0014999     C         0             A        247R20EHF02EF8E   0001949
+
+S            0002999     D         0             A        WI8HRW8H43FJSHF   0000389
+
+S            0001000     C         0             A        SDFSKJ84MS09123   0000130
+
+S            0012999     D         0             B        247R20EHF02EF8E   0001689
+
+S            0112999     D         0             B        247R20EHF02EF8E   0014689
+
+L            0014999     D         0             C        LFW8H88W84HFW4F   0001949
+
+L            0004999     D         0             D        LFW8H88W84HFW4F   0000649
+
+S            0014999     C         0             E        247R20EHF02EF8E   0001949
+
+S            0001000     C         0             E        AADFSKJ84MS0913   0000130
+
+S            0008999     C         0             A        WI8HRW8H43FJSHF   0001169
+
+L            0004999     D         0             A        LFW8H88W84HFW4F   0000649
+
+S            0002000     C         0             E        SDFSKJ84MS09123   0000260
+
+S            0002999     D         0             E        WI8HRW8H43FJSHF   0000389
+
+S            0001000     C         0             E        SDFSKJ84MS09123   0000130        ERROR REPORT                  Page: 3
+CODE         AMOUNT      TYPE  STORE NUM   INVOICE NUM     SKUCODE         TAX OWING
+
+
+
+S            0012999     D         0             B        247R20EHF02EF8E   0001689
+
+S            0008999     C         0             B        WI8HRW8H43FJSHF   0001169
+
+S            0001000     C         0             B        SDFSKJ84MS09123   0000130
+
+S            0112999     D         0             B        247R20EHF02EF8E   0014689
+
+S            0000999     C         0             C        WI8HRW8H43FJSHF   0000129
+
+S            0002999     D         0             D        WI8HRW8H43FJSH2   0000389
+
+S            0001000     C         0             D        SDFSKJ84MS09123   0000130
+
+S            0012999     D         0             D        247R20EHF02EF8E   0001689
+
+S            0008999     C         0             E        WI8HRW8H43FJSHF   0001169
+
+L            0004999     D         0             E        LFW8H88W84HFW4F   0000649
+
+S            0002000     C         0             E        SDFSKJ84MS09123   0000260
+
+S            0014999     C         0             A        247R20EHF02EF8E   0001949
+
+S            0002999     D         0             A        WI8HRW8H43FJSHF   0000389
+
+S            0012999     D         0             A        247R20EHF02EF8E   0001689
+
+S            0001000     C         0             B        SDFSKJ84MS09123   0000130
+
+L            0112999     D         0             D        247R20EHF02EF8E   0014689
+
+S            0012999     D         0             B        247R20EHF02EF8E   0001689
+
+S            0001000     C         0             C        SDFSKJ84MS09123   0000130
+
+S            0112999     D         0             C        247R20EHF02EF8E   0014689
+
+S            0000999     C         0             C        WI8HRW8H43FJSHF   0000129        ERROR REPORT                  Page: 4
+CODE         AMOUNT      TYPE  STORE NUM   INVOICE NUM     SKUCODE         TAX OWING
+
+
+
+L            0004999     D         0             D        LFW8H88W84HFW4F   0000649
+
+S            0014999     C         0             D        247R20EHF02EF8E   0001949
+
+S            0002999     D         0             E        WI8HRW8H43FJSHF   0000389
+
+S            0072999     D         0             E        247R20EHF02EF8E   0009489
+
+S            0008999     C         0             E        WI8HRW8H43FJSHF   0001169
+
+S            0002000     C         0             D        SDFSKJ84MS09123   0000260
+
+S            0014999     C         0             D        247R20EHF02EF8E   0001949
+
+S            0002999     D         0             C        WI8HRW8H43FJSHF   0000389
+
+S            0001000     C         0             C        SDFSKJ84MS09123   0000130
+
+S            0012949     C         0             C        247R20EHF02EF8E   0001683
+
+S            0008999     C         1             C        WI8HRW8H43FJSHF   0001169
+
+S            0801000     C         1             D        SDFSKJ84MS09123   0104130
+
+S            0112999     D         1             D        247R20EHF02EF8E   0014689
+
+L            0014999     D         1             D        LFW8H88W84HFW4F   0001949
+
+L            0004999     D         1             A        LFW8H88W84HFW4F   0000649
+
+S            0014999     C         1             A        247R20EHF02EF8E   0001949
+
+S            0001000     C         0             B        AADFSKJ84MS0913   0000130
+
+L            0004999     D         0             C        LFW8H88W84HFW4F   0000649
+
+S            0002000     C         0             C        SDFSKJ84MS09123   0000260
+
+S            0014999     C         0             C        247R20EHF02EF8E   0001949        ERROR REPORT                  Page: 5
+CODE         AMOUNT      TYPE  STORE NUM   INVOICE NUM     SKUCODE         TAX OWING
+
+
+
+S            0002999     D         0             D        WI8HRW8H43FJSHF   0000389
+
+S            0001000     C         0             D        SDFSKJ84MS09123   0000130
+
+S            0008999     C         1             D        WI8HRW8H43FJSHF   0001169
+
+S            0001000     C         0             E        SDFSKJ84MS09123   0000130
+
+S            0112999     D         0             E        247R20EHF02EF8E   0014689
+
+S            0000999     C         0             E        WI8HRW8H43FJSHF   0000129
+
+L            0014999     D         0             E        LFW8H88W84HFW4F   0001949
+Total number of S records and Total Amount        0000000000
+
+Total number of L records and Total Amount        0000014999
+
+Total number of S&L records and Total Amount      0000014999
