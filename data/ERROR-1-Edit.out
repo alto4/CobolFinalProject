@@ -1,7 +1,7 @@
 
-Scott Alton          Final Project
+ Group 4            Final Project - Program 1
 
-            ERROR REPORT          01
+                  ERROR REPORT         PAGE 1
 
  Record  --------Raw Data--------
  Number      and Error Messages
@@ -27,7 +27,7 @@ Scott Alton          Final Project
 
    45    S0001000CA02BB-460031SDFSKJ84MS09123         INVOICE LEFT SAME
 
-            ERROR REPORT          02
+                  ERROR REPORT         PAGE 2
 
  Record  --------Raw Data--------
  Number      and Error Messages
@@ -53,7 +53,7 @@ Scott Alton          Final Project
 
    74    R0002999CW02CE-750335SDFSKJ84MS09123         WRONG PAYMENT TYPE
 
-            ERROR REPORT          03
+                  ERROR REPORT         PAGE 3
 
  Record  --------Raw Data--------
  Number      and Error Messages
@@ -79,7 +79,7 @@ Scott Alton          Final Project
 
    95    R0002499CR03AC-950402FLW8H4FW8H4FWF4         INVOICE RIGHT INVALID
 
-            ERROR REPORT          04
+                  ERROR REPORT         PAGE 4
 
  Record  --------Raw Data--------
  Number      and Error Messages
@@ -111,7 +111,7 @@ Scott Alton          Final Project
 
   127    X0014999CR12EB-127636247R20EHF02EF8E         WRONG TRANSACTION CODE
 
-            ERROR REPORT          05
+                  ERROR REPORT         PAGE 5
 
  Record  --------Raw Data--------
  Number      and Error Messages
@@ -137,9 +137,9 @@ Scott Alton          Final Project
 
   152    S0002999DB08AB-152637WI8HRW8H43FJSH2         INVALID STORE NUMBER
 
-----------------------------------
- VALIDATION SUMMARY
+---------------------------------------------
+     VALIDATION SUMMARY
 
- RECORDS READ COUNT:   0152
- VALID RECORDS:  102
- INVALID COUNT: 050
+ RECORDS READ COUNT:    152
+ VALID RECORDS:         102
+ INVALID COUNT:          50

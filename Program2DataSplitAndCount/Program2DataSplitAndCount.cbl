@@ -1,16 +1,17 @@
        identification division.
-       program-id. FinalProject-DataSplitAndCount.
-
-       author. Scott Alton.
-	   date-written. 2021-03-18.
-
+       program-id. Program2DataSplitAndCount.
+       author. Jaimin Gautambhai Patel,
+               Scott Alton,
+			   Nirmal Nimeshbhai Patel.
+	   date-written. 2021-03-30.
 	  ******************************************************************
-	  * Program Description: This program generates an error report for
-      * all item records being processed. Input from the raw data is 
-      * validated to conform to pre-defined business rules, and all 
-      * applicable error messages for each item record are provided. 
-      * If the record is successfully validated to meet business 
-      * requirements, it's successful validity is noted in the report. 
+	  * Program Description: This program generates a report breaking
+      * down the transaction history and payment type summary data based
+      * on processed transaction records. Total amounts for each
+      * transaction type are presented, as well as an overall total
+      * revenue based on sales - returns processed. Data is also sorted
+      * based on sales/layaway and return transaction types, and the 
+      * raw data is pushed into separate files for further processing.
 	  ******************************************************************
 	   environment division.
 	   configuration section.
@@ -94,12 +95,26 @@
 	   	  
       * Headings 
       * Assignment title heading
+      * Assignment title heading
+       01 ws-heading1-title.
+		   05 filler					 pic x(1)
+                                    value spaces.
+		   05 ws-name			         pic x(11)
+                                    value "Group 4".
+		   05 filler                     pic x(57)
+                                    value spaces.
+           05 ws-assignment-title	     pic x(25)
+                                    value "Final Project - Program 2".
+		  
       * Page title heading
-	   01 ws-heading1-title.
-		   05 filler			         pic x(35) value spaces. 
+
+	   01 ws-heading2-title.
+		   05 filler			         pic x(33)
+                                    value spaces.
 		   05 ws-title			         pic x(25)
                                     value "COUNTS AND CONTROL TOTALS".
-		   05 filler                     pic x(35) value spaces.
+		   05 filler                     pic x(37)
+                                    value spaces.
 
       * Cash       Credit   
       * Column headings
@@ -149,26 +164,26 @@
       * Individual formatted record line
 	   01 ws-store-line. 
            05 ws-store-detail-line             occurs 6 times.
-			   10 filler                 pic x(4)  value spaces.
-               10 ws-store-num           pic 9(3).
+			   10 filler                 pic x(5)  value spaces.
+               10 ws-store-num           pic 9(2).
 			   10 filler                 pic x(5)  value spaces.
 			   10 ws-sl-amount           pic $$$,$$9.99
 											       value 0.
 			   10 filler                 pic x(3)  value spaces.
 			   10 ws-r-amount            pic $$,$$9.99
                                                    value 0.
-			   10 filler                 pic x(6)  value spaces. 
-			   10 ws-r-count             pic 9(3)  value 0.
+			   10 filler                 pic x(5)  value spaces. 
+			   10 ws-r-count             pic zz9   value 0.
+			   10 filler                 pic x(6)  value spaces.
+			   10 ws-s-count             pic zz9   value 0.
 			   10 filler                 pic x(5)  value spaces.
-			   10 ws-s-count             pic 9(3)  value 0.
-			   10 filler                 pic x(5)  value spaces.
-			   10 ws-l-count             pic 9(3)  value 0.
+			   10 ws-l-count             pic zz9   value 0.
 			   10 filler                 pic x(5)  value spaces.
 		       10 ws-debit-per		     pic 99.9  value 0.
 			   10 filler                 pic x(7)  value spaces.
 			   10 ws-cash-per		     pic 99.9  value 0.
 			   10 filler                 pic x(8)  value spaces.
-			   10 ws-cash-per		     pic 99.9  value 0.
+			   10 ws-credit-per		     pic 99.9  value 0.
            
                
            05 filler                     pic x(4)  value spaces.
@@ -177,13 +192,13 @@
  
       * Summary lines
        01 ws-horizontal-rule.
-		   05 ws-summary-hor-rule-line-1 pic x(46)
-				 value "----------------------------------------------".
-		   05 ws-summary-hor-rule-line-2 pic x(46)
-	   		     value "----------------------------------------------".
+		   05 ws-summary-hor-rule-line-1 pic x(47)
+				value "-----------------------------------------------".
+		   05 ws-summary-hor-rule-line-2 pic x(47)
+	   		    value "-----------------------------------------------".
 		   01 ws-summary-line.
 	       05 ws-summary-heading		 pic x(29)
-		         value "         TRANSACTION SUMMARY".
+		        value "         TRANSACTION SUMMARY".
 
 	   01 ws-transaction-code-counts.
 		   05 ws-s-count-line.
@@ -288,11 +303,16 @@
 		   05 ws-calc-code-l-count	     pic 9(3)  value 0.
 		   05 ws-calc-code-r-count	     pic 9(3)  value 0.
 		   05 ws-calc-code-sl-count	     pic 9(3)  value 0.
+
       * Payment types
 		   05 ws-ca-count				 pic 9(3)    occurs 6 times.
 		   05 ws-cr-count				 pic 9(3)    occurs 6 times.
 		   05 ws-db-count				 pic 9(3)    occurs 6 times.
 		   05 ws-sales-trans-count   	 pic 9(3)	 occurs 6 times.
+		   05 ws-calc-r-count			 pic 9(3)	 occurs 6 times.
+		   05 ws-calc-s-count			 pic 9(3)	 occurs 6 times.
+		   05 ws-calc-l-count			 pic 9(3)	 occurs 6 times.
+
 	   01 ws-calcs.
 		   05 ws-calc-s-total-amount     pic 9(6)v99
                                                    value 0.
@@ -306,7 +326,8 @@
                                                    value 0.
 		   05 ws-calc-sl-amount			 pic 9(6)v99 occurs 12 times.
 		   05 ws-calc-r-amount           pic 9(6)v99 occurs 12 times.
-		   05 ws-calc-per				 pic 99v99 value 0.
+		   05 ws-calc-per				 pic 99v999
+                                                   value 0.
 	   01 ws-store-index                 pic 9     value 0.
 	       
       * Utility constants
@@ -379,7 +400,9 @@
 		   move ws-one                to ws-store-counter.
 	   310-print-page-header.
 		   write report-line from ws-blank.
-		   write report-line from ws-heading1-title
+		   write report-line from ws-heading1-title.
+		   write report-line from ws-blank.
+		   write report-line from ws-heading2-title.
 
 		   write report-line from ws-col-headings-1
 			 after advancing ws-one line.
@@ -436,8 +459,9 @@
       * Increment valid item code counters, or produce code error
 		   if (tr-code-s) then
 			   add ws-one             to ws-calc-code-s-count
-			   add ws-one             to ws-s-count(ws-store-index)
-
+			   add ws-one             to ws-calc-s-count(ws-store-index)
+			   move ws-calc-s-count(ws-store-index)
+                                      to ws-s-count(ws-store-index)
 			   add tr-amount          to ws-calc-s-total-amount
 			        
 			   add tr-amount          to ws-calc-sl-amount(ws-store-index)
@@ -449,7 +473,9 @@
 			   perform 420-check-payment-type
 		   else if (tr-code-r) then
 			   add ws-one             to ws-calc-code-r-count
-			   add ws-one             to ws-r-count(ws-store-index)
+			   add ws-one             to ws-calc-r-count(ws-store-index)
+			   move ws-calc-r-count(ws-store-index)
+				                      to ws-r-count(ws-store-index)
                add tr-amount          to ws-calc-r-total-amount
 
 			   add tr-amount          to ws-calc-r-amount(ws-store-index)
@@ -460,7 +486,9 @@
 			   write r-line from ws-raw-data
 		   else if (tr-code-l) then
 			   add ws-one             to ws-calc-code-l-count
-			   add ws-one             to ws-l-count(ws-store-index)
+			   add ws-one             to ws-calc-l-count(ws-store-index)
+			   move ws-calc-l-count(ws-store-index)
+				                      to ws-l-count(ws-store-index)
 			   add tr-amount          to ws-calc-l-total-amount
 			   add tr-amount          to ws-calc-sl-amount(ws-store-index)
 			   move ws-calc-sl-amount(ws-store-index)
@@ -476,56 +504,65 @@
 		   add ws-calc-l-total-amount to ws-calc-s-total-amount
 			 giving ws-calc-sl-total-amount.
 
-		   
 	   420-check-payment-type. 
-		   display "PAYMENT TYPE " tr-payment-type " AT STORE " tr-store-num.
-
-		   if (tr-payment-type = "DB") then
-			   add ws-one to ws-db-count(ws-store-index)
+		   
+		   if (tr-payment-type-db) then
+			   add ws-one             to ws-db-count(ws-store-index)
 		   end-if.
 
-		   if (tr-payment-type = "CA") then
-			   add ws-one to ws-ca-count(ws-store-index)
+		   if (tr-payment-type-ca) then
+			   add ws-one             to ws-ca-count(ws-store-index)
 		   end-if.
 
-		   if (tr-payment-type = "CR") then
-			   add ws-one to ws-cr-count(ws-store-index)
+		   if (tr-payment-type-cr) then
+			   add ws-one             to ws-cr-count(ws-store-index)
 		   end-if.
 
-		   add ws-s-count(ws-store-index)  to ws-l-count(ws-store-index)
+		   add ws-calc-s-count(ws-store-index)
+                                      to ws-calc-l-count(ws-store-index)
 		     giving ws-sales-trans-count(ws-store-index).
 
+		   perform 430-update-payment-percentages.
 
-		    display "divide ws-cr-count by ws-sales-trans-count(ws-store-index)".
-      *    display "divide " ws-cr-count(ws-store-index) " by " ws-sales-trans-count(ws-store-index).
-		   divide ws-cr-count(1) by ws-sales-trans-count(1)
-			 giving ws-calc-per.
+
+       430-update-payment-percentages.
+
+      * Recalculate percentages for each payment type in current store     
+      * Calculate credit transaction percentages
+		   divide ws-cr-count(ws-store-index)
+             by ws-sales-trans-count(ws-store-index)
+			   giving ws-calc-per rounded.
+		   		  
+		   multiply ws-calc-per by 100 giving ws-calc-per.
+
+           move ws-calc-per           to ws-credit-per(ws-store-index).
+
+      * Calculate debit transaction percentages
+		   divide ws-db-count(ws-store-index)
+             by ws-sales-trans-count(ws-store-index)
+			   giving ws-calc-per rounded.
 
 		   multiply ws-calc-per by 100 giving ws-calc-per.
-		   display "STORE 1 CR percent" ws-calc-per.
 
-      *    display "divide " ws--count(ws-store-index) " by " ws-sales-trans-count(ws-store-index).
-		   divide ws-db-count(1) by ws-sales-trans-count(1)
-			 giving ws-calc-per.
+           move ws-calc-per           to ws-debit-per(ws-store-index).
 
-		   display "percent of debit transactions" ws-calc-per.
+      * Calculate cash transaction percentages
+		   divide ws-ca-count(ws-store-index)
+             by ws-sales-trans-count(ws-store-index)
+			   giving ws-calc-per rounded.
 
-		   divide ws-ca-count(1) by ws-sales-trans-count(1)
-			 giving ws-calc-per.
+		   multiply ws-calc-per by 100 giving ws-calc-per.
 
-		   display "percent of cash transactions" ws-calc-per.
+           move ws-calc-per           to ws-cash-per(ws-store-index).
 		   
-		  
-
 	   600-print-totals.
 		  
-
-		   write report-line from ws-store-detail-line(1).
-		   write report-line from ws-store-detail-line(2).
-		   write report-line from ws-store-detail-line(3).
-		   write report-line from ws-store-detail-line(4).
-		   write report-line from ws-store-detail-line(5).
-		   write report-line from ws-store-detail-line(6).
+		   write report-line from ws-store-detail-line(ws-one).
+		   write report-line from ws-store-detail-line(ws-two).
+		   write report-line from ws-store-detail-line(ws-three).
+		   write report-line from ws-store-detail-line(ws-four).
+		   write report-line from ws-store-detail-line(ws-five).
+		   write report-line from ws-store-detail-line(ws-six).
 
 	  * Print total number of transactions by type
 		   move ws-calc-code-s-count  to ws-code-s-count.
@@ -535,8 +572,7 @@
 
 	  * Print total amounts values by transaction type
 		   move ws-record-count       to ws-input-count.
-
-		   display "COUNT " ws-calc-code-s-count "+" ws-calc-code-l-count .
+		   		  
 		   add ws-calc-code-s-count   to ws-calc-code-l-count
 			 giving ws-code-sl-count.
 
@@ -560,12 +596,7 @@
 			 after advancing ws-one lines.
 		   write report-line from ws-blank
 			 after advancing ws-one lines.
-
-		   display ws-ca-count(1) "Cash payments".
-		   display ws-cr-count(1) "CREDIT PAYMENTS".
-		   display ws-db-count(1) "Debit payments".
-		  
-
+		   	
       * 
 	   write report-line from ws-s-count-line
 			 after advancing ws-one lines.
@@ -578,6 +609,7 @@
 
 		   write report-line from ws-horizontal-rule
 			 after advancing ws-one lines.
+
       * Display required totals in summary
 		   write report-line from ws-s-total-amount-line
 	   		 after advancing ws-one lines.
@@ -606,4 +638,4 @@
              counts-and-controls-file.
 
 	  ******************************************************************
-	   end program FinalProject-DataSplitAndCount.
+	   end program Program2DataSplitAndCount.

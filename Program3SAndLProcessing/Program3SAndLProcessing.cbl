@@ -9,7 +9,7 @@
                       organization is line sequential.
 
                   select output-file
-                      assign to "../../../data/ReturnRecord.out"
+                      assign to "../../../data/SAndLRecords.out"
                       organization is line sequential.
        configuration section.
 

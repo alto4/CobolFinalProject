@@ -1,9 +1,9 @@
        identification division.
-       program-id. A6-DataValidation.
-
-       author. Scott Alton.
-	   date-written. 2021-03-18.
-
+       program-id. Program1ErrorReport.
+       author. Jaimin Gautambhai Patel,
+               Scott Alton,
+			   Nirmal Nimeshbhai Patel.
+	   date-written. 2021-03-30.
 	  ******************************************************************
 	  * Program Description: This program generates an error report for
       * all item records being processed. Input from the raw data is 
@@ -28,12 +28,12 @@
 			   organization is line sequential.
 		   
            select valid-data-file
-                   assign to "../../../data/VALID-DATA-1-Edit.out"
-                   organization is line sequential.
+               assign to "../../../data/VALID-DATA-1-Edit.out"
+               organization is line sequential.
 
 		   select invalid-data-file
-				   assign to "../../../data/INVALID-DATA-1-Edit.out"
-				   organization is line sequential.
+			   assign to "../../../data/INVALID-DATA-1-Edit.out"
+			   organization is line sequential.
 	  ******************************************************************
 	   data division.
 	   file section.
@@ -56,7 +56,7 @@
 		       88 tr-payment-type-cr         value "CR".
 			   88 tr-payment-type-db         value "DB".
 		   05 tr-store-num               pic 99.
-		       88 tr-store-num-valid 	     values 01 thru 05, 12.
+		       88 tr-store-num-valid 	     values 1 thru 5, 12.
 		   05 tr-invoice-num.
 		       10 tr-invoice-num-left-1  pic x.
                    88 tr-invoice-num-left-1-valid
@@ -64,10 +64,10 @@
 			   10 tr-invoice-num-left-2  pic x.
                    88 tr-invoice-num-left-2-valid
                                              values "A" thru "E".
-	           10 tr-invoice-num-dash       pic x(1).
+	           10 tr-invoice-num-dash    pic x(1).
                    88 tr-invoice-num-dash-valid
                                              value "-".
-	           10 tr-invoice-num-right      pic 9(6).
+	           10 tr-invoice-num-right   pic 9(6).
                    88 tr-invoice-num-right-valid
                                              value 100000 thru 900000.
 		   05 tr-sku-code				 pic x(15).
@@ -77,34 +77,41 @@
 		   data record is error-line
 		   record contains 60 characters.
 
-       01 error-line                    pic x(46).
+       01 error-line                     pic x(46).
 
        fd valid-data-file 
            data record is data-line
            record contains 100 characters.
 
-	   01 valid-data-line               pic x(50).
+	   01 valid-data-line                pic x(50).
 
 	   fd invalid-data-file 
-				  data record is data-line
-				  record contains 100 characters.
-       01 invalid-data-line     		pic x(36).
+		   data record is data-line
+		   record contains 100 characters.
+
+       01 invalid-data-line     		 pic x(36).
 	  ******************************************************************
 	   working-storage section.
 	   	  
       * Headings 
       * Assignment title heading
        01 ws-heading1-name-line.
-		   05 ws-name			         pic x(11) value "Scott Alton".
-		   05 filler                     pic x(10) value spaces.
-           05 ws-assignment-title	     pic x(13) value "Final Project".
+		   05 filler					 pic x(1)
+                                    value spaces.
+		   05 ws-name			         pic x(11)
+                                    value "Group 4".
+		   05 filler                     pic x(8)
+                                    value spaces.
+           05 ws-assignment-title	     pic x(25)
+                                    value "Final Project - Program 1".
 		  
       * Page title heading
 	   01 ws-heading2-title.
-		   05 filler			         pic x(12) value spaces. 
+		   05 filler			         pic x(18) value spaces. 
 		   05 ws-title			         pic x(12) value "ERROR REPORT".
-		   05 filler                     pic x(10) value spaces.
-		   05 ws-page-num                pic 99     value 1.
+		   05 filler                     pic x(9)  value spaces.
+		   05 filler					 pic x(5)  value "PAGE ".
+		   05 ws-page-num                pic 9    value 1.
 
       * Column headings
 	   01 ws-col-headings-1.
@@ -140,10 +147,10 @@
 		   		   	
       * Summary lines
        01 ws-summary.
-		   05 ws-summary-hor-rule-line   pic x(34)
-                             value "----------------------------------".
-		   05 ws-summary-heading		 pic x(19)
-							 value " VALIDATION SUMMARY".
+		   05 ws-summary-hor-rule-line	 pic x(45)
+		          value "---------------------------------------------".
+		   05 ws-summary-heading		 pic x(23)
+							 value "     VALIDATION SUMMARY".
            05 ws-input-count-line.
 			   10 filler                 pic x
                              value space.
@@ -151,7 +158,7 @@
                              value "RECORDS READ COUNT:".
 			   10 filler                 pic x(3)
                              value spaces.
-               10 ws-input-count         pic 99(3)
+               10 ws-input-count         pic zzz9
                              value 0.
 			   10 filler                 pic x(8)
                              value spaces.
@@ -160,9 +167,9 @@
                              value space.
 		       10 filler                 pic x(14)
                              value "VALID RECORDS:".
-			   10 filler                 pic x(2)
+			   10 filler                 pic x(9)
                              value spaces.
-               10 ws-valid-count          pic 9(3)
+               10 ws-valid-count         pic zz9
                              value 0.
 			   10 filler                 pic x(15)
                              value spaces.
@@ -171,9 +178,9 @@
                              value space.
 		       10 filler                 pic x(14)
                              value "INVALID COUNT:".
-			   10 filler                 pic x
+			   10 filler                 pic x(9)
                              value spaces.
-               10 ws-error-count         pic 9(3)
+               10 ws-error-count         pic zz9
                              value 0.
 			   10 filler                 pic x(15)
                              value spaces.
@@ -192,14 +199,15 @@
 		   05 ws-page-count              pic 99    value 1.
 	       05 ws-line-count              pic 99    value 0.
 	       05 ws-record-count            pic 9(3)  value 0.
+		   05 ws-calc-valid-count		 pic 9(3)  value 0.
+		   05 ws-calc-error-count		 pic 9(3)  value 0.
 	  * Transaction code counters
 		   05 ws-code-s-count			 pic 9(3)  value 0.
 		   05 ws-code-r-count			 pic 9(3)  value 0.
            05 ws-code-l-count			 pic 9(3)  value 0.
-       
+
 	  * Pagination constants
        77 ws-lines-per-page              pic 9(3)  value 10.
-
       * Error message content constants
 	   77 ws-code-err-msg                pic x(22)
 								   value "WRONG TRANSACTION CODE".
@@ -221,8 +229,7 @@
 							       value "INVALID TRANSACTION AMOUNT".
 	   77 ws-sku-blank-err-msg           pic x(19)
 	   	   	   						   value "SKU CANNOT BE BLANK".
-	   77 ws-valid-record-msg            pic x(13)
-								   value "*VALID RECORD".
+
       * Utility constants
        77 ws-one                         pic 9        value 1.
 	   77 ws-file-empty                  pic x        value "y".
@@ -317,7 +324,6 @@
 
 		   move transaction-record    to ws-raw-data.
 
-		   display ws-detail-line.
       *  Validate all record details according to business rules
 		   perform 410-check-trans-code.
 		   perform 450-validate-payment-type.
@@ -332,17 +338,19 @@
 		   if (ws-error-message = ws-blank) then
 	  *		   write to data file here
 			   write valid-data-line from ws-raw-data
-			   add ws-one to ws-valid-count
+			   add ws-one             to ws-calc-valid-count
+			   move ws-calc-valid-count 
+				                      to ws-valid-count
 			   subtract ws-one from ws-line-count
 		   else
 	  *			Writing report line
 			   write invalid-data-line from ws-raw-data
-			   add ws-one to ws-error-count
+			   add ws-one             to ws-calc-error-count
+			   move ws-calc-error-count
+				                      to ws-error-count 
 		   end-if.
 
-
-		   move spaces to ws-error-message.
-
+		   move spaces                to ws-error-message.
 
 		   read transaction-file
 		       at end move ws-file-empty
@@ -371,23 +379,30 @@
 		   end-if.
 
 	   451-validate-amount.
-		   if (not tr-amount-valid or not tr-amount is numeric)
+		   if (not tr-amount-valid or
+              not tr-amount is numeric)
 			   perform 460-check-invalid-record-output
-			   move ws-trans-amount-err-msg to ws-error-message
+			   move ws-trans-amount-err-msg
+                                      to ws-error-message
+
 			   perform 461-display-error
 		   end-if.
 
 	   452-validate-store-num.
 		   if (not tr-store-num-valid)
 			   perform 460-check-invalid-record-output
-			   move ws-store-num-err-msg to ws-error-message
+			   move ws-store-num-err-msg
+                                      to ws-error-message
+
 			   perform 461-display-error
 		   end-if.
 
 	   453-validate-invoice-num-left. 
 		   if (tr-invoice-num-left-1 equals tr-invoice-num-left-2)
 			   perform 460-check-invalid-record-output
-			   move ws-inv-num-left-same-msg to ws-error-message
+			   move ws-inv-num-left-same-msg
+                                      to ws-error-message
+
 			   perform 461-display-error
 		   end-if.
 
@@ -396,7 +411,9 @@
               (not tr-invoice-num-left-1 alphabetic-upper) or 
 		      (not tr-invoice-num-left-2 alphabetic-upper)
 			   perform 460-check-invalid-record-output
-			   move ws-inv-num-left-err-msg to ws-error-message
+			   move ws-inv-num-left-err-msg
+                                      to ws-error-message
+
 			   perform 461-display-error
 		   end-if.
 		   
@@ -404,21 +421,27 @@
 		    if (not tr-invoice-num-right-valid) or
 			  (tr-invoice-num-right not numeric)
 			   perform 460-check-invalid-record-output
-			   move ws-inv-num-right-err-msg to ws-error-message
+			   move ws-inv-num-right-err-msg
+                                      to ws-error-message
+
 			   perform 461-display-error
 		   end-if.
 
 	   455-validate-invoice-num-center. 
 		   if (not tr-invoice-num-dash-valid)
 		       perform 460-check-invalid-record-output
-			   move ws-inv-num-no-dash-err-msg to ws-error-message
+			   move ws-inv-num-no-dash-err-msg
+                                      to ws-error-message
+
 			   perform 461-display-error
 		   end-if.
 
 	   456-validate-sku-code. 
 		   if (tr-sku-code = ws-blank)
 			   perform 460-check-invalid-record-output
-			   move ws-sku-blank-err-msg to ws-error-message
+			   move ws-sku-blank-err-msg
+                                      to ws-error-message
+
 			   perform 461-display-error
 		   end-if.
 
@@ -427,9 +450,9 @@
 			   write error-line from ws-detail-line
 				 after advancing ws-one line
 		   end-if.
+
 	   461-display-error.
 		   write error-line from ws-error-line.
-
 
 	   600-print-totals.
 	  * Print total values
@@ -456,4 +479,4 @@
              invalid-data-file, valid-data-file.
 
 	  ******************************************************************
-	   end program A6-DataValidation.
+	   end program Program1ErrorReport.
